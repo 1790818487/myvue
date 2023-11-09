@@ -9,6 +9,7 @@ import LoginComponent from "@/components/LoginComponent/LoginComponent";
 import MainComponent from "@/components/MainComponent/MainComponent";
 import SensitiveComponent from '@/components/SensitiveComponent/SensitiveComponent'
 import RealNameComponent from '@/components/RealNameComponent/RealNameComponent'
+import UserIdentity from '@/components/UserIdentity/UserIdentity'
 const routes = [
     {
         path: '/main',
@@ -17,6 +18,7 @@ const routes = [
             {path: '/main/channel', component: ChannelList},
             {path: '/main/sensitive', component: SensitiveComponent},
             {path: '/main/realname', component: RealNameComponent},
+            {path: '/main/identity', component: UserIdentity},
         ]
     },
     {path: '/login',component: LoginComponent},

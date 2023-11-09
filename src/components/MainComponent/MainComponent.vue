@@ -11,6 +11,7 @@
               <el-menu-item index="1-1" route="/main/channel">频道管理</el-menu-item>
               <el-menu-item index="1-2" route="/main/sensitive">敏感词管理</el-menu-item>
               <el-menu-item index="1-3" route="/main/realname">实名管理</el-menu-item>
+              <el-menu-item index="1-4" route="/main/identity">身份审核</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 
