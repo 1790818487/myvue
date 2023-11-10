@@ -1,5 +1,7 @@
 <template>
+
   <div class="LoginComponent">
+
     <el-form :rules="rules" ref="loginForm" :model="loginForm" class="loginContainer">
       <h3 class="loginTitle">
         欢迎登录
@@ -18,7 +20,12 @@
       <!--        <img :src="captchaUrl">-->
 
       <!--      </el-form-item>-->
-      <el-checkbox v-model="checked" class="loginRemember">记住我</el-checkbox>
+<!--      <el-checkbox v-model="checked" class="loginRemember">记住我</el-checkbox>-->
+
+      <el-radio-group style="height: 30px" v-model="salt">
+      <el-radio :label=1 >管理员登录</el-radio>
+      <el-radio :label=2 >普通用户登录</el-radio>
+      </el-radio-group>
 
       <el-button type="primary" style="width:100%" @click="submitLogin">登录</el-button>
     </el-form>
@@ -83,23 +90,47 @@ export default {
         }],
         password: [{required: true, message: "请输入密码", trigger: "blur"}, {min: 5, message: '密码长度要大于5', trigger: 'blur'}],
       },
-      token: localStorage.getItem('token')
+      token: localStorage.getItem('token'),
+      salt: 1,
+      loginUrlAdmin: 'http://localhost:6001/api/v1/login/in',
+      loginUrlUser: 'http://localhost:6002/api/wmuser/login/in',
     }
   },
   methods: {
     submitLogin() {
+      var url;
+      if (this.salt === 1)
+        url = this.loginUrlAdmin
+      else
+        url = this.loginUrlUser
+
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          axios.post("http://localhost:6001/api/v1/login/in", this.loginForm).then(
+          axios.post(url, this.loginForm).then(
               r => {
                 if (r.data.code === 200) {
-                  localStorage.setItem('token', r.data.data.token)
-                  localStorage.setItem('adUser', JSON.stringify(r.data.data.adUser))
+                  if (this.salt===1) {
+                    localStorage.setItem('nickname', r.data.data.adUser.nickname)
+                    localStorage.setItem('token', r.data.data.token)
+                    localStorage.setItem('User', JSON.stringify(r.data.data.adUser))
+                    localStorage.setItem('salt', this.salt)
+                  }
+                  else if (this.salt===2)
+                  {
+                    localStorage.setItem('nickname', r.data.data.wmUser.nickname)
+                    localStorage.setItem('token', r.data.data.token)
+                    localStorage.setItem('User', JSON.stringify(r.data.data.wmUser))
+                    localStorage.setItem('salt', this.salt)
+                  }
                   this.$message({
                     message: '欢迎登录',
                     type: 'success'
                   });
-                  this.$router.push('/main')
+                  if (this.salt === 1)
+                    this.$router.push('/main')
+                  else
+                    this.$router.push('/user')
+
                 } else {
                   this.$message({
                     message: r.data.errorMessage,
@@ -116,11 +147,10 @@ export default {
     },
     init() {
       if (this.token != null) {
-          // this.$message({
-          //   message: '欢迎登录',
-          //   type: 'success'
-          // });
-        this.$router.push('/main')
+        if (localStorage.getItem('salt') === '1')
+          this.$router.push('/main')
+        else
+          this.$router.push('/user')
       }
     }
   },

@@ -253,7 +253,7 @@ export default {
           this.dialogFormVisible = false;
           this.$refs['channelForm'].resetFields()
           if (r.headers.has('REF_TOKEN'))
-            localStorage.setItem('token',r.headers.REF_TOKEN)
+            localStorage.setItem('token', r.headers.get('REF_TOKEN'))
           this.init()
         } else {
           this.$message.error("添加失败！")

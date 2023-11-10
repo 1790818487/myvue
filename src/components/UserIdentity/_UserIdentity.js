@@ -9,7 +9,11 @@ export default {
   props: {},
 
   data () {
-    return {}
+    return {
+      customHeader:{
+        token:localStorage.getItem('token')
+      }
+    }
   },
 
   computed: {},
@@ -18,5 +22,12 @@ export default {
 
   created () {},
 
-  methods: {}
+  methods: {
+    successAfter(response, file, fileList){
+      console.log(response)
+      console.log(file)
+      console.log(fileList)
+      return file;
+    }
+  }
 }

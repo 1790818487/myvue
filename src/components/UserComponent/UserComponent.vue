@@ -5,13 +5,21 @@
         <el-menu router=true :default-openeds="['1']">
 
           <el-submenu index="1">
-            <template v-slot:title><i class="el-icon-message">管理员账户</i></template>
+            <template v-slot:title><i class="el-icon-message">自媒体用户</i></template>
             <el-menu-item-group>
               <template v-slot:title>分组</template>
-              <el-menu-item index="1-1" route="/main/channel">频道管理</el-menu-item>
-              <el-menu-item index="1-2" route="/main/sensitive">敏感词管理</el-menu-item>
-              <el-menu-item index="1-3" route="/main/realname">实名管理</el-menu-item>
-              <el-menu-item index="1-4" route="/main/identity">身份审核</el-menu-item>
+              <el-menu-item index="1-1" :route="myMaterial()">
+                <i class="el-icon-menu"></i>
+                我的素材</el-menu-item>
+              <el-menu-item index="1-2" route="">
+                <i class="el-icon-view"></i>
+                已发布</el-menu-item>
+              <el-menu-item index="1-3" route="">
+                <i class="el-icon-message"></i>
+                草稿</el-menu-item>
+              <el-menu-item index="1-4" route="">
+                <i class="el-icon-circle-plus-outline"></i>
+                发布</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 
@@ -25,9 +33,9 @@
             <el-row type="flex">
               <el-col style="text-align: right">
                 <i class="el-icon-user"></i>
-                <span>管理员账户，
+                <span>欢迎自媒体用户,
                   <span v-text="nickname"></span>,
-           <a href="javaScript:void(0)" @click="exit">
+           <a v-show="token!=null" href="javaScript:void(0)" @click="exit">
              退出登录</a>
          </span>
               </el-col>
@@ -40,7 +48,6 @@
         </el-main>
       </el-container>
     </el-container>
-
   </div>
 </template>
 
@@ -62,7 +69,9 @@ export default {
   data(){
     return{
       token: localStorage.getItem('token'),
-      nickname:localStorage.getItem('nickname')
+      nickname:localStorage.getItem('nickname'),
+      User:JSON.parse(localStorage.getItem('User')),
+      user_url:'/user'
     }
   },
   methods:{
@@ -83,10 +92,13 @@ export default {
         this.$router.push('/')
       }).catch(() => {
       });
+    },
+    myMaterial(){
+      return this.user_url+'/material/'+this.User.id
     }
   },
   created() {
-    this.$router.push('/main/channel')
+    this.$router.push(this.user_url+'/material/'+this.User.id)
   }
 }
 </script>

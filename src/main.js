@@ -10,7 +10,10 @@ import MainComponent from "@/components/MainComponent/MainComponent";
 import SensitiveComponent from '@/components/SensitiveComponent/SensitiveComponent'
 import RealNameComponent from '@/components/RealNameComponent/RealNameComponent'
 import UserIdentity from '@/components/UserIdentity/UserIdentity'
+import UserComponent from "@/components/UserComponent/UserComponent";
+import UserMaterial from "@/components/UserMaterial/UserMaterial";
 const routes = [
+    //管理员用户访问的
     {
         path: '/main',
         component: MainComponent,
@@ -22,7 +25,15 @@ const routes = [
         ]
     },
     {path: '/login',component: LoginComponent},
-    {path: '/',redirect:'/login'}
+    {path: '/',redirect:'/login'},
+    //自媒体用户能访问的
+    {
+        path:'/user',
+        component: UserComponent,
+        children: [
+            {path:'/user/material/:userId',component: UserMaterial}
+        ]
+    }
 
 ]
 

@@ -53,7 +53,7 @@ export default {
                   this.$router.push('/login')
                 }
                 if (r.headers.has('REF_TOKEN'))
-                  localStorage.setItem('token', r.headers.REF_TOKEN)
+                  localStorage.setItem('token', r.headers.get('REF_TOKEN'))
                 this.dataList = r.data.data
                 this.pageInfo = r.data
               }

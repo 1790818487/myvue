@@ -4,14 +4,18 @@
       <div>
 
         <el-upload
-            class="avatar-uploader"
-            action="https://www.dmeo.com/posts/"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess(res, file)"
-            :before-upload="beforeAvatarUpload(file)">
-          <img v-if="imageUrl" :src="imageUrl" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            accept="jpg,jpeg,png"
+            class="upload-demo"
+            action="http://localhost:6001/api/v1/apUser/upload"
+            :headers="customHeader"
+            :limit="1"
+            :on-success="successAfter(response, file, fileList)"
+           >
+          <i class="el-icon-plus avatar-uploader-icon"></i>
+          <el-button size="small" type="primary">点击上传</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
+
 
       </div>
 
