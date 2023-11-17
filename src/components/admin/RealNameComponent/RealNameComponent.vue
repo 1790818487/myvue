@@ -90,13 +90,17 @@
 
         <el-table-column
             fixed="right"
-            width="100px"
+            width="150px"
 
             label="功能操作">
           <template v-slot="scope">
-            <el-button type="primary" :disabled="scope.row.status===9||scope.row.status===0">
+            <el-button type="danger" size="mini" :disabled="scope.row.status===9||scope.row.status===0||scope.row.status===2">
+              驳回</el-button>
+
+            <el-button type="success" size="mini" :disabled="scope.row.status===9||scope.row.status===0">
               通过</el-button>
           </template>
+
         </el-table-column>
 
       </el-table>

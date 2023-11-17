@@ -2,6 +2,13 @@
   <div class="SensitiveComponent">
     <h1>敏感词管理</h1>
     <hr>
+    <div>
+      <a href="https://2305-images.oss-cn-beijing.aliyuncs.com/file/%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xlsx">下载导入模板</a>
+      <br>
+      <a href="">下载敏感词数据</a>
+      <br>
+      <a href="">上传敏感词数据文件</a>
+    </div>
     <div style="height: 100px;text-align-all: center;line-height: 60px">
       <strong>搜索敏感词</strong>
       <el-input style="width: 300px" placeholder="请输入敏感词" v-model="formData.name"/>

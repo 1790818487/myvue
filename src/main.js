@@ -4,14 +4,18 @@ import Vue from 'vue';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
-import ChannelList from './components/ChannelComponent/ChannelList'
+import ChannelList from '@/components/admin/ChannelComponent/ChannelList'
 import LoginComponent from "@/components/LoginComponent/LoginComponent";
-import MainComponent from "@/components/MainComponent/MainComponent";
-import SensitiveComponent from '@/components/SensitiveComponent/SensitiveComponent'
-import RealNameComponent from '@/components/RealNameComponent/RealNameComponent'
-import UserIdentity from '@/components/UserIdentity/UserIdentity'
-import UserComponent from "@/components/UserComponent/UserComponent";
-import UserMaterial from "@/components/UserMaterial/UserMaterial";
+import MainComponent from "@/components/admin/MainComponent/MainComponent";
+import SensitiveComponent from '@/components/admin/SensitiveComponent/SensitiveComponent'
+import RealNameComponent from '@/components/admin/RealNameComponent/RealNameComponent'
+import UserIdentity from '@/components/admin/UserIdentity/UserIdentity'
+import UserComponent from "@/components/user/UserComponent/UserComponent";
+import UserMaterial from "@/components/user/UserMaterial/UserMaterial";
+import ContextList from "@/components/user/ContextList/ContextList";
+import ArticleComponent from "@/components/user/ArticleComponent/ArticleComponent";
+
+
 const routes = [
     //管理员用户访问的
     {
@@ -31,7 +35,9 @@ const routes = [
         path:'/user',
         component: UserComponent,
         children: [
-            {path:'/user/material/:userId',component: UserMaterial}
+            {path:'/user/material/:userId',component: UserMaterial},
+            {path:'/user/context/:userId',component: ContextList},
+            {path:'/user/article/:userId',component: ArticleComponent},
         ]
     }
 

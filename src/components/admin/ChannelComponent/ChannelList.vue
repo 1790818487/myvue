@@ -231,11 +231,13 @@ export default {
             type: 'warning'
           });
           localStorage.removeItem('token')
-          localStorage.removeItem('adUser')
+          localStorage.removeItem('User')
+          localStorage.removeItem('nickname')
+          localStorage.removeItem('salt')
           this.$router.push('/login')
         }
         if (r.headers.has('REF_TOKEN'))
-          localStorage.setItem('token',r.headers.REF_TOKEN)
+          localStorage.setItem('token',r.headers.get('REF_TOKEN'))
         this.channelList = r.data.data
         this.total = r.data.total
       })
